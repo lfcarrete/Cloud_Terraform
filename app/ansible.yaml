@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+  - name: migration
+    command: kubectl apply -f /home/lfcarrete/learn-terraform-aws-instance/app/django.yaml
+    args:
+      chdir: /home/
