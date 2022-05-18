@@ -3,6 +3,11 @@
   connection: local
   tasks:
   - name: migration
-    command: kubectl apply -f /home/lfcarrete/learn-terraform-aws-instance/app/django.yaml
+    command: aws eks --region us-east-1 update-kubeconfig --name eks
     args:
-      chdir: /home/
+      chdir: /home/lfcarrete/learn-terraform-aws-instance/app/ansible.yaml
+  tasks:
+  - name: migration
+    command: kubectl apply -f /home/lfcarrete/learn-terraform-aws-instance/app/tese.yaml
+    args:
+      chdir: /home/lfcarrete/learn-terraform-aws-instance/app/ansible.yaml

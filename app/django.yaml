@@ -1,33 +1,37 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: django-app
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: django-app
-  template:
-    metadata:
-      labels:
-        app: django-app
-    spec:
-      containers:
-      - name: django-app
-        image: luisfsc/cloud_docker:latest
-        ports:
-        - containerPort: 8000
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: python-svc
+  name: fastapi-test-service
 spec:
-  type: LoadBalancer
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8000
   selector:
-    app: django-app
+    app: fastapi-test-app
+  ports:
+    - protocol: "TCP"
+      port: 3000
+      targetPort: 8000
+  type: LoadBalancer
 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-test-app
+spec:
+  selector:
+    matchLabels:
+      app: fastapi-test-app
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: fastapi-test-app
+    spec:
+      containers:
+        - name: fastapi-test-app
+          image: luisfsc/cloud_docker:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+
+
+---
