@@ -2,12 +2,12 @@
 - hosts: localhost
   connection: local
   tasks:
-  - name: migration
+  - name: Setup
     command: aws eks --region us-east-1 update-kubeconfig --name eks
-    args:
-      chdir: /home/lfcarrete/learn-terraform-aws-instance/app/ansible.yaml
-  tasks:
+  - name: Sleep
+    pause:
+      seconds: 5
   - name: migration
-    command: kubectl apply -f /home/lfcarrete/learn-terraform-aws-instance/app/tese.yaml
+    command: kubectl apply -f /home/lfcarrete/Desktop/Cloud_Terraform/app/fastAPI.yaml
     args:
-      chdir: /home/lfcarrete/learn-terraform-aws-instance/app/ansible.yaml
+      chdir: /home/lfcarrete/Desktop/Cloud_Terraform
