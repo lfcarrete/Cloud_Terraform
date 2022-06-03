@@ -8,6 +8,4 @@
     pause:
       seconds: 5
   - name: migration
-    command: kubectl apply -f /home/lfcarrete/Desktop/Cloud_Terraform/app/fastAPI.yaml
-    args:
-      chdir: /home/lfcarrete/Desktop/Cloud_Terraform
+    command: kubectl apply -f fastAPI.yaml

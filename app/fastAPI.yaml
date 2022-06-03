@@ -20,7 +20,6 @@ spec:
   selector:
     matchLabels:
       app: fastapi-test-app
-  replicas: 2
   template:
     metadata:
       labels:
@@ -32,6 +31,16 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
-
-
 ---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: fastapi-test-app
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: fastapi-test-app
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 2
